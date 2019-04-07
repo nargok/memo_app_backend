@@ -3,9 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gorilla/mux"
 	"io"
 	"io/ioutil"
+	"memo_app/models"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -22,8 +25,28 @@ func MemoIndex(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func MemoRead(w http.ResponseWriter, r *http.Request) {
+	// request内容からidを取り出す
+	vars := mux.Vars(r)
+	memoId, _ := strconv.Atoi(vars["memoId"])
+
+	targetMemo := memos.Where(func(memo models.Memo) bool {
+		return memo.Id == memoId
+	})
+
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	if targetMemo == nil {
+		w.WriteHeader(404)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(targetMemo); err != nil {
+		panic(err)
+	}
+}
+
 func MemoCreate(w http.ResponseWriter, r *http.Request) {
-	var memo Memo
+	var memo models.Memo
 	memo.CreatedAt = time.Now()
 
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))

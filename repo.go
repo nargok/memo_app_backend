@@ -1,15 +1,17 @@
 package main
 
+import "memo_app/models"
+
 var curriedId int
 
-var memos Memos
+var memos models.MemoSlice
 
 func init() {
-	RepoCreateMemo(Memo{Title: "This is first memo", Content: "First content"})
-	RepoCreateMemo(Memo{Title: "This is second memo", Content: "Second content"})
+	RepoCreateMemo(models.Memo{Title: "This is first memo", Content: "First content"})
+	RepoCreateMemo(models.Memo{Title: "This is second memo", Content: "Second content"})
 }
 
-func RepoCreateMemo(m Memo) Memo {
+func RepoCreateMemo(m models.Memo) models.Memo {
 	curriedId += 1
 	m.Id = curriedId
 	memos = append(memos, m)

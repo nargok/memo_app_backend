@@ -19,13 +19,19 @@ var routes = Routes{
 		Index,
 	},
 	Route{
-		"TodoIndex",
+		"MemoIndex",
 		"GET",
 		"/memos",
 		MemoIndex,
 	},
 	Route{
-		"TodoCreate",
+		"MemoShow",
+		"GET",
+		"/memos/{memoId}",
+		MemoRead,
+	},
+	Route{
+		"MemoCreate",
 		"POST",
 		"/memos",
 		MemoCreate,

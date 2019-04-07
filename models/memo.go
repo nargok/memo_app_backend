@@ -1,7 +1,8 @@
-package main
+package models
 
 import "time"
 
+// +gen slice:"Where"
 type Memo struct {
 	Id 			int
 	Title 		string
