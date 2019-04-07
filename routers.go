@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gorilla/mux"
+	"memo_app/logger"
 	"net/http"
 )
 
@@ -12,7 +13,7 @@ func NewRouter() *mux.Router {
 		var handler http.Handler
 
 		handler = route.HandleFunc
-		handler = Logger(handler, route.Name)
+		handler = logger.Logger(handler, route.Name)
 
 		router.
 			Methods(route.Method).
