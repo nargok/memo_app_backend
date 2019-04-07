@@ -15,4 +15,3 @@ func RepoCreateMemo(m Memo) Memo {
 	memos = append(memos, m)
 	return m
 }
-

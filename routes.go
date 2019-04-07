@@ -24,4 +24,10 @@ var routes = Routes{
 		"/memos",
 		MemoIndex,
 	},
+	Route{
+		"TodoCreate",
+		"POST",
+		"/memos",
+		MemoCreate,
+		},
 }
